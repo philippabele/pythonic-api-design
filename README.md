@@ -1,5 +1,5 @@
 
-![example branch parameter](https://github.com/philippabele/pythonic-api-design/actions/workflows/pytest.yaml/badge.svg)
+![example branch parameter](https://github.com/philippabele/pythonic-api-design/workflows/Test/pytest.yaml/badge.svg)
 
 # pythonic-api-design
 
