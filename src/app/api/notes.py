@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
-from app.sql import crud
-from app.sql.models import NoteDB, NoteSchema
+from . import crud
+from .models import NoteDB, NoteSchema
 
 router = APIRouter()
 
