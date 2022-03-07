@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from .api import notes
-from .sql.db import database, engine, metadata
+from app.api import notes
+from app.db import database, engine, metadata
 
 metadata.create_all(engine)
 
