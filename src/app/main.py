@@ -1,6 +1,29 @@
+import time
+import json
+import requests
+from datetime import datetime
 from fastapi import FastAPI
+from elasticsearch import Elasticsearch
 from app.api import notes
 from app.db import database, engine, metadata
+
+
+def connect_elasticsearch():
+    time.sleep(15)
+    _es = None
+    _es = Elasticsearch("http://127.0.0.1:9200")
+    return _es
+
+
+es = connect_elasticsearch()
+
+doc = {
+    'author': 'author_name',
+    'text': 'Interensting content...',
+    'timestamp': datetime.now(),
+}
+resp = es.index(index="test-index", id=1, document=doc)
+print(resp['result'])
 
 metadata.create_all(engine)
 

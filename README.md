@@ -23,3 +23,7 @@ First, please install Docker Desktop from this [LINK](https://docs.docker.com/de
 
 ## Run FastAPI from terminal:
 `uvicorn app.main:app --port 80`
+
+## Elasticsearch
+Set vm.max_map_count to at least 262144 as described here:
+[ELASTIC](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites)
