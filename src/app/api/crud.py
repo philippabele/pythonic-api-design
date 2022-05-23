@@ -19,8 +19,7 @@ async def get_all():
 
 async def put(id: int, payload: NoteSchema):
     query = (
-        notes
-        .update()
+        notes.update()
         .where(id == notes.c.id)
         .values(title=payload.title, description=payload.description)
         .returning(notes.c.id)
