@@ -22,3 +22,13 @@ First, please install Docker Desktop from this [LINK](https://docs.docker.com/de
 ### Log-In
 Visit Grafana's UI in your browser: `http://localhost:3000`.
 The username is: `admin` and password: `GrafanaPW` by default. This can be changed in the file `config.monitoring`.
+
+#### Open the explore tab
+![img.png](grafana_explore.png)
+
+#### Choose Prometheus as the datasource
+![img_1.png](grafana_datasource.png)
+
+#### Choose your metric
+Then click `Use query`. A new Graph is created below with all your selected parameters.
+![img_2.png](grafana_metric.png)
