@@ -3,8 +3,9 @@ version: '3.8'
 services:
   web:
     build: ./src
+    container_name: Py-Container
     command: |
-      bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
+      bash -c 'uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
     volumes:
       - ./src/:/usr/src/app/
     ports:
@@ -14,8 +15,13 @@ services:
     depends_on:
       - db
       - elasticsearch
+    networks:
+      - es-net
+      - db-net
+
   db:
     image: postgres:13-alpine
+    container_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     expose:
@@ -24,34 +30,42 @@ services:
       - POSTGRES_USER=hello_fastapi
       - POSTGRES_PASSWORD=hello_fastapi
       - POSTGRES_DB=hello_fastapi_dev
+    networks:
+      - db-net
+
   elasticsearch:
-    container_name: es-container
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile-ES
+    container_name: elasticsearch
+    restart: always
     environment:
-      - cluster.name=docker-cluster
-      - node.name=elasticsearch
-      - cluster.initial_master_nodes=elasticsearch
-      - bootstrap.memory_lock=true
-#      - http.cors.allow-origin=http://localhost:1358,http://127.0.0.1:1358
-#      - http.cors.enabled=true
-#      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
-#      - http.cors.allow-credentials=true
-      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
       - xpack.security.enabled=false
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./ci/data/es/db:/usr/share/elasticsearch/data
+      - ./ci/data/es/logs:/usr/share/elasticsearch/logs
+      - ./ci/data/es/repo:/usr/share/elasticsearch/repo
+    expose:
+      - 9200
     ulimits:
       memlock:
         soft: -1
         hard: -1
     ports:
       - "9200:9200"
+      - "9300:9300"
     networks:
       - es-net
 
   kibana:
-    container_name: kb-container
-    image: docker.elastic.co/kibana/kibana:8.0.1
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.2.0
+    restart: always
     environment:
-      - ELASTICSEARCH_HOSTS=http://es-container:9200
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     networks:
       - es-net
     depends_on:
@@ -64,4 +78,6 @@ volumes:
 
 networks:
   es-net:
+    driver: bridge
+  db-net:
     driver: bridge

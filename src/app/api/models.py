@@ -4,6 +4,10 @@ from pydantic import BaseModel, Field
 from app.sql.database import Base
 
 
+class EsLogSchema(BaseModel):
+    message: str
+
+
 class NoteSchema(BaseModel):
     title: str = Field(..., min_length=3, max_length=50)
     description: str = Field(..., min_length=3, max_length=50)
