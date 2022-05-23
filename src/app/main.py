@@ -25,4 +25,3 @@ app.include_router(notes.router, prefix="/notes", tags=["notes"])
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
-
