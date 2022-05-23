@@ -16,3 +16,9 @@
 First, please install Docker Desktop from this [LINK](https://docs.docker.com/desktop/#download-and-install).
 ### Build Docker containers:
 `docker-compose up -d --build`
+
+## Grafana
+
+### Log-In
+Visit Grafana's UI in your browser: `http://localhost:3000`.
+The username is: `admin` and password: `GrafanaPW` by default. This can be changed in the file `config.monitoring`.
