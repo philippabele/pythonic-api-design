@@ -19,10 +19,9 @@ def es_post_log(document: dict):
 @router.post("/es-log", status_code=201)
 async def es_log(payload: EsLogSchema):
     document = {
-        'route': '/es-log',
-        'message': payload.message,
-        'timestamp': datetime.now()
+        "route": "/es-log",
+        "message": payload.message,
+        "timestamp": datetime.now(),
     }
     resp = es_post_log(document)
     return resp
-

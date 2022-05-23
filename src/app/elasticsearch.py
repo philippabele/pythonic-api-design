@@ -24,9 +24,9 @@ class ESClient:
             print(f"An error occurred while connecting: {e}")
 
         doc = {
-            'project': 'Pythonic-API',
-            'message': 'Successfully established Elasticsearch connection from Python!',
-            'timestamp': datetime.now(),
+            "project": "Pythonic-API",
+            "message": "Successfully established Elasticsearch connection from Python!",
+            "timestamp": datetime.now(),
         }
 
         try:
@@ -36,4 +36,4 @@ class ESClient:
         except Exception as e:
             print(f"An error occured... {e}")
         else:
-            print(resp['result'])
+            print(resp["result"])
