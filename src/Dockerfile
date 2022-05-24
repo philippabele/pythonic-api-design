@@ -21,5 +21,8 @@ RUN set -eux \
     && pip install -r /usr/src/app/requirements.txt \
     && rm -rf /root/.cache/pip
 
+WORKDIR /usr/src
 # copy project
-COPY . /usr/src/app/
+COPY . /usr/src/
+
+WORKDIR /usr/

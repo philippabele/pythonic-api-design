@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from pydantic import BaseModel, Field
-from app.sql.database import Base
+from src.app.sql.database import Base
 
 
 class NoteSchema(BaseModel):

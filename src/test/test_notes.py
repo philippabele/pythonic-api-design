@@ -2,19 +2,26 @@ import json
 
 import pytest
 
-from app.api import crud # I have to write: from app.app.api import crud
+from src.app.api import crud
 
 
 def test_create_note(test_app, monkeypatch):
     test_request_payload = {"title": "something", "description": "something else"}
-    test_response_payload = {"id": 1, "title": "something", "description": "something else"}
+    test_response_payload = {
+        "id": 1,
+        "title": "something",
+        "description": "something else",
+    }
 
     async def mock_post(payload):
         return 1
 
     monkeypatch.setattr(crud, "post", mock_post)
 
-    response = test_app.post("/notes/", data=json.dumps(test_request_payload),)
+    response = test_app.post(
+        "/notes/",
+        data=json.dumps(test_request_payload),
+    )
 
     assert response.status_code == 201
     assert response.json() == test_response_payload
@@ -24,7 +31,9 @@ def test_create_note_invalid_json(test_app):
     response = test_app.post("/notes/", data=json.dumps({"title": "something"}))
     assert response.status_code == 422
 
-    response = test_app.post("/notes/", data=json.dumps({"title": "1", "description": "2"}))
+    response = test_app.post(
+        "/notes/", data=json.dumps({"title": "1", "description": "2"})
+    )
     assert response.status_code == 422
 
 
@@ -106,7 +115,10 @@ def test_update_note_invalid(test_app, monkeypatch, id, payload, status_code):
 
     monkeypatch.setattr(crud, "get", mock_get)
 
-    response = test_app.put(f"/notes/{id}/", data=json.dumps(payload),)
+    response = test_app.put(
+        f"/notes/{id}/",
+        data=json.dumps(payload),
+    )
     assert response.status_code == status_code
 
 
@@ -140,4 +152,3 @@ def test_remove_note_incorrect_id(test_app, monkeypatch):
 
     response = test_app.delete("/notes/0/")
     assert response.status_code == 422
-

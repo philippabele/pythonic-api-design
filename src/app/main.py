@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from app.api import notes
-from app.db import database, engine, metadata
+from src.app.api import notes
+from src.app.db import database, engine, metadata
 
 metadata.create_all(engine)
 
@@ -16,10 +16,10 @@ async def startup():
 async def shutdown():
     await database.disconnect()
 
+
 app.include_router(notes.router, prefix="/notes", tags=["notes"])
 
 
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
-
