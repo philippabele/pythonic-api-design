@@ -7,9 +7,6 @@ from databases import Database
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if DATABASE_URL is None:
-    DATABASE_URL = "postgresql://hello_fastapi:hello_fastapi@db/hello_fastapi_dev"
-
 # SQLAlchemy
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()

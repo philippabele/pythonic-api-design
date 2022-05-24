@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from src.app.api import crud  # I have to write: from app.app.api import crud
+from src.app.api import crud
 
 
 def test_create_note(test_app, monkeypatch):
