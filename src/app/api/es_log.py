@@ -1,8 +1,8 @@
 from datetime import datetime
 
 from fastapi import APIRouter
-from app.api.models import EsLogSchema
-from app.elasticsearch import ESClient
+from src.app.api.models import EsLogSchema
+from src.app.elasticsearch import ESClient
 
 
 esclient = ESClient()

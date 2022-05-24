@@ -5,9 +5,9 @@ services:
     build: ./src
     container_name: Py-Container
     command: |
-      bash -c 'uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
+      bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn src.app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
     volumes:
-      - ./src/:/usr/src/app/
+      - ./src/:/usr/src/
     ports:
       - "8002:8000"
     environment:

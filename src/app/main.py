@@ -1,5 +1,5 @@
-from app.api import notes, es_log
-from app.db import database
+from src.app.api import notes, es_log
+from src.app.db import database
 from fastapi import FastAPI
 
 
