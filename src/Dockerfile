@@ -26,4 +26,4 @@ WORKDIR /usr/src
 # copy project
 COPY . ./
 
-WORKDIR /usr/src/app
+WORKDIR /usr/
