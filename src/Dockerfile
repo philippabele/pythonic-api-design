@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH /app
 
 # copy requirements file
-COPY ./requirements.txt /usr/src/app/requirements.txt
+COPY ./requirements.txt ./
 
 # install dependencies
 RUN set -eux \
@@ -21,5 +21,9 @@ RUN set -eux \
     && pip install -r /usr/src/app/requirements.txt \
     && rm -rf /root/.cache/pip
 
+WORKDIR /usr/src
+
 # copy project
-COPY . /usr/src/app/
+COPY . ./
+
+WORKDIR /usr/src/app

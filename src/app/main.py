@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from starlette_prometheus import metrics, PrometheusMiddleware
-from app.api import notes
-from app.db import database, engine, metadata
+from api import notes
+from db import database, engine, metadata
 
 metadata.create_all(engine)
 
