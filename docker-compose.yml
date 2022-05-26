@@ -2,12 +2,14 @@ version: '3.8'
 
 services:
   web:
-    build: ./src
-    container_name: Py-Container
+    build:
+      context: ./01_simple_crud_sql/src
+      dockerfile: Dockerfile
+    container_name: web
     command: |
       bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn src.app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
     volumes:
-      - ./src/:/usr/src/
+      - ./01_simple_crud_sql/src/:/usr/src/
     ports:
       - "8002:8000"
     environment:
@@ -35,7 +37,7 @@ services:
 
   elasticsearch:
     build:
-      context: .
+      context: ./02_simple_elastic_logging
       dockerfile: Dockerfile-ES
     container_name: elasticsearch
     restart: always
