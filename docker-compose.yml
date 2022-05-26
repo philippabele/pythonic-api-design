@@ -2,12 +2,14 @@ version: '3.8'
 
 services:
   web:
-    build: ./src
+    build:
+      context: 01_simple_crud_sql/src
+      dockerfile: Dockerfile
     container_name: web
     command: |
       bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn src.app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
     volumes:
-      - ./src/:/usr/src/
+      - ./01_simple_crud_sql/src/:/usr/src/
     ports:
       - "8002:8000"
     environment:
@@ -17,8 +19,6 @@ services:
       - db-net
   db:
     image: postgres:13-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
     expose:
       - 5432
     environment:
@@ -35,7 +35,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./03_grafana_monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     networks:
@@ -49,9 +49,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./03_grafana_monitoring/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     env_file:
-      - ./config.monitoring
+      - ./03_grafana_monitoring/config.monitoring
     depends_on:
       - prometheus
     networks:
