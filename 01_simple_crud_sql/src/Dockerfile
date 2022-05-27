@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH /app
 
 # copy requirements file
-COPY requirements.txt /usr/src/app/requirements.txt
+COPY requirements.txt ./
 
 # install dependencies
 RUN set -eux \
@@ -23,6 +23,6 @@ RUN set -eux \
 
 WORKDIR /usr/src
 # copy project
-COPY . /usr/src/
+COPY . ./
 
 WORKDIR /usr/
