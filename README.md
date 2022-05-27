@@ -14,10 +14,12 @@
 
 ## Docker:
 First, please install Docker Desktop from this [LINK](https://docs.docker.com/desktop/#download-and-install).
+### Build Docker Image with the following command:
+`docker build -t pythonic-api-design .`
 
-### Build Docker containers:
-`docker-compose up -d --build`
+### Run it with:
+`docker  run -d --name pythonic-api -p 80:80 pythonic-api-design`
 
-## Elasticsearch
-Set vm.max_map_count to at least 262144 as described here:
-[ELASTIC](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites)
+
+## Run FastAPI from terminal:
+`uvicorn app.main:app --port 80`
