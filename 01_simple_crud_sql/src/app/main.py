@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from src.app.api import notes
 from src.app.db import database, engine, metadata
+from src.app.api import notes, es_log
+
 
 metadata.create_all(engine)
 
@@ -18,6 +19,7 @@ async def shutdown():
 
 
 app.include_router(notes.router, prefix="/notes", tags=["notes"])
+app.include_router(es_log.router, prefix="/es_log", tags=["es_log"])
 
 
 @app.get("/")
