@@ -1,7 +1,9 @@
-from src.app.api import notes, es_log
-from src.app.db import database
 from fastapi import FastAPI
+from src.app.db import database, engine, metadata
+from src.app.api import notes, es_log
 
+
+metadata.create_all(engine)
 
 app = FastAPI()
 
