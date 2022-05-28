@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build:
-      context: ./01_simple_crud_sql/src
+      context: 01_simple_crud_sql/src
       dockerfile: Dockerfile
     container_name: web
     command: |
@@ -20,6 +20,7 @@ services:
     networks:
       - es-net
       - db-net
+      - monitoring
 
   db:
     image: postgres:13-alpine
@@ -32,6 +33,35 @@ services:
       - POSTGRES_DB=hello_fastapi_dev
     networks:
       - db-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: always
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./03_grafana_monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    user: "472" # 472 or 104
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./03_grafana_monitoring/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    env_file:
+      - ./03_grafana_monitoring/config.monitoring
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring
 
   elasticsearch:
     build:
@@ -73,11 +103,10 @@ services:
     ports:
       - "5601:5601"
 
-volumes:
-  postgres_data:
-
 networks:
-  es-net:
-    driver: bridge
   db-net:
+    driver: bridge
+  monitoring:
+    driver: bridge
+  es-net:
     driver: bridge

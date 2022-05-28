@@ -1,11 +1,14 @@
 from fastapi import FastAPI
-from src.app.db import database, engine, metadata
+from starlette_prometheus import metrics, PrometheusMiddleware
 from src.app.api import notes, es_log
+from src.app.db import database, engine, metadata
 
 
 metadata.create_all(engine)
 
 app = FastAPI()
+app.add_middleware(PrometheusMiddleware)
+app.add_route("/metrics", metrics)
 
 
 @app.on_event("startup")
