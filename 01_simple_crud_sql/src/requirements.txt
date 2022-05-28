@@ -1,0 +1,12 @@
+fastapi
+elasticsearch
+SQLAlchemy
+pydantic
+pytest
+asyncpg
+databases[postgresql]
+psycopg2-binary
+uvicorn
+
+# dev
+requests
