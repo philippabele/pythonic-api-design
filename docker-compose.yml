@@ -14,11 +14,17 @@ services:
       - "8002:8000"
     environment:
       - DATABASE_URL=postgresql://hello_fastapi:hello_fastapi@db/hello_fastapi_dev
+    depends_on:
+      - db
+      - elasticsearch
     networks:
-      - monitoring
+      - es-net
       - db-net
+      - monitoring
+
   db:
     image: postgres:13-alpine
+    container_name: db
     expose:
       - 5432
     environment:
@@ -57,11 +63,50 @@ services:
     networks:
       - monitoring
 
-volumes:
-  postgres_data:
+  elasticsearch:
+    build:
+      context: ./02_simple_elastic_logging
+      dockerfile: Dockerfile-ES
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./ci/data/es/db:/usr/share/elasticsearch/data
+      - ./ci/data/es/logs:/usr/share/elasticsearch/logs
+      - ./ci/data/es/repo:/usr/share/elasticsearch/repo
+    expose:
+      - 9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - es-net
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.2.0
+    restart: always
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - es-net
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
 
 networks:
   db-net:
     driver: bridge
   monitoring:
+    driver: bridge
+  es-net:
     driver: bridge

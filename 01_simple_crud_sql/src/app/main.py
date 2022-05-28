@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from starlette_prometheus import metrics, PrometheusMiddleware
-from src.app.api import notes
+from src.app.api import notes, es_log
 from src.app.db import database, engine, metadata
+
 
 metadata.create_all(engine)
 
@@ -21,6 +22,7 @@ async def shutdown():
 
 
 app.include_router(notes.router, prefix="/notes", tags=["notes"])
+app.include_router(es_log.router, prefix="/es_log", tags=["es_log"])
 
 
 @app.get("/")

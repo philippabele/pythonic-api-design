@@ -34,5 +34,5 @@ jobs:
       - name: Test with pytest
         shell: 'script -q -e -c "bash {0}"'
         run: |
-          sleep 30
+          sleep 15
           docker-compose exec web pytest src

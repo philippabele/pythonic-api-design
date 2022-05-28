@@ -14,6 +14,7 @@
 
 ## Docker:
 First, please install Docker Desktop from this [LINK](https://docs.docker.com/desktop/#download-and-install).
+
 ### Build Docker containers:
 `docker-compose up -d --build`
 
@@ -32,3 +33,8 @@ The username is: `admin` and password: `GrafanaPW` by default. This can be chang
 #### Choose your metric
 Then click `Use query`. A new Graph is created below with all your selected parameters.
 ![img_2.png](03_grafana_monitoring/grafana_metric.png)
+
+
+## Elasticsearch
+Set vm.max_map_count to at least 262144 as described here:
+[ELASTIC](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites)
