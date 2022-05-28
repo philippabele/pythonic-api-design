@@ -1,40 +1,23 @@
+# Pythonic API design
+[![Test status](https://github.com/philippabele/pythonic-api-design/workflows/Test/badge.svg)][test]
+![Version badges](https://img.shields.io/badge/Python-3.6%7C3.7%7C3.8%7C3.9-brightgreen)
 
-<p align="center">
+This project is a resource for future Python developers.
 
-<a href="https://github.com/philippabele/pythonic-api-design/actions/workflows/pytest.yaml" target="_blank">
-    <img src="https://github.com/philippabele/pythonic-api-design/workflows/Test/badge.svg" alt="Test">
-</a>
+[test]:https://github.com/philippabele/pythonic-api-design/actions/workflows/pytest.yaml
 
-<img src="https://img.shields.io/badge/Python-3.6%7C3.7%7C3.8%7C3.9-brightgreen" alt="Python">
-
-
-</p>
-
-# pythonic-api-design
-
-## Docker:
-First, please install Docker Desktop from this [LINK](https://docs.docker.com/desktop/#download-and-install).
-
-### Build Docker containers:
-`docker-compose up -d --build`
-
-## Grafana
-
-### Log-In
-Visit Grafana's UI in your browser: `http://localhost:3000`.
-The username is: `admin` and password: `GrafanaPW` by default. This can be changed in the file `config.monitoring`.
-
-#### Open the explore tab
-![img.png](03_grafana_monitoring/grafana_explore.png)
-
-#### Choose Prometheus as the datasource
-![img_1.png](03_grafana_monitoring/grafana_datasource.png)
-
-#### Choose your metric
-Then click `Use query`. A new Graph is created below with all your selected parameters.
-![img_2.png](03_grafana_monitoring/grafana_metric.png)
+## Setup
+First, please install Docker Desktop from this [LINK](https://docs.docker.com/desktop/#download-and-install).\
+Open a terminal and build the Docker containers by running:
+```shell
+docker-compose up -d --build
+```
 
 
-## Elasticsearch
-Set vm.max_map_count to at least 262144 as described here:
-[ELASTIC](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites)
+## Documentation
+
+- [Grafana][]
+- [Elasticsearch][]
+
+[Grafana]: 03_grafana_monitoring/readme.MD
+[Elasticsearch]: 02_simple_elastic_logging/readme.MD
