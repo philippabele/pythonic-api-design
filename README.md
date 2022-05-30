@@ -16,8 +16,10 @@ docker-compose up -d --build
 
 ## Documentation
 
+- [Simple CRUD SQL][]
 - [Grafana][]
 - [Elasticsearch][]
 
+[Simple CRUD SQL]: 01_simple_crud_sql/readme.MD
 [Grafana]: 03_grafana_monitoring/readme.MD
 [Elasticsearch]: 02_simple_elastic_logging/readme.MD
