@@ -22,9 +22,8 @@ jobs:
           find .. -type f \( -iname '*.md' ! -iname "all.md" \) | sort -k1 | xargs cat >> "$working_directory/chapters/all.md"
       - name: Copy images to graphics path
         run: |
-          pwd
           ls
-          find . -type f \( -iname '*.jpg' -o -iname '*.png' ! -path "./00_latex_template/graphics/*" \) | xargs cp -t "$working_directory/graphics/"
+          find . -type f \( -iname '*.jpg' -o -iname '*.png' ! -path "./00_latex_template/graphics/*" ! -iname 'dhbw_mosbach.jpg' \) | xargs cp -t "$working_directory/graphics/"
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
