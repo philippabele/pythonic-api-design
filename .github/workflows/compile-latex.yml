@@ -23,7 +23,8 @@ jobs:
       - name: Copy images to graphics path
         run: |
           pwd
-          find .. -type f \( -iname '*.jpg' -o -iname '*.png' ! -path "../pythonic-api-design/00_latex_template/graphics/*" \) | xargs cp -t "$working_directory/graphics/"
+          ls
+          find .. -type f \( -iname '*.jpg' -o -iname '*.png' ! -path "./00_latex_template/graphics/*" \) | xargs cp -t "$working_directory/graphics/"
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
