@@ -20,6 +20,7 @@ jobs:
       - name: Unify Markdown Files into one
         run: |
           find .. -type f \( -iname '*.md' ! -iname "all.md" \) | sort -k1 | xargs cat >> "$working_directory/chapters/all.md"
+          find .. -type f \( -iname '*.jpg' -o -iname '*.png' \) | cp {} "$working_directory/graphics/"
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
