@@ -20,7 +20,10 @@ jobs:
       - name: Unify Markdown Files into one
         run: |
           find .. -type f \( -iname '*.md' ! -iname "all.md" \) | sort -k1 | xargs cat >> "$working_directory/chapters/all.md"
-          find .. -type f \( -iname '*.jpg' -o -iname '*.png' ! -path "*/graphics/*" \) | xargs cp -t "$working_directory/graphics/"
+      - name: Copy images to graphics path
+        run: |
+          pwd
+          find .. -type f \( -iname '*.jpg' -o -iname '*.png' ! -path "../pythonic-api-design/00_latex_template/graphics/*" \) | xargs cp -t "$working_directory/graphics/"
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
