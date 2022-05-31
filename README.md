@@ -21,5 +21,5 @@ docker-compose up -d --build
 - [Elasticsearch][]
 
 [Simple CRUD SQL]: https://github.com/philippabele/pythonic-api-design/blob/development/01_simple_crud_sql/crud-sql.MD
-[Grafana]: https://github.com/philippabele/pythonic-api-design/blob/development/03_grafana_monitoring/readme.MD
-[Elasticsearch]: https://github.com/philippabele/pythonic-api-design/blob/development/02_simple_elastic_logging/readme.MD
+[Grafana]: https://github.com/philippabele/pythonic-api-design/blob/development/03_grafana_monitoring/monitoring.MD
+[Elasticsearch]: https://github.com/philippabele/pythonic-api-design/blob/development/02_simple_elastic_logging/elastic.MD
