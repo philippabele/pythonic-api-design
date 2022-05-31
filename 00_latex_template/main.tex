@@ -136,7 +136,14 @@ identifierstyle=\color{aqua}
 %\write18{wget https://github.com/philippabele/pythonic-api-design/workflows/Test/badge.svg}
 %\write18{wget https://img.shields.io/badge/Python-3.6\%7C3.7\%7C3.8\%7C3.9-brightgreen}
 
-\markdownInput{chapters/all.md}
+%\markdownInput{chapters/all.md}
+
+\begin{markdown}
+Set vm.max_map_count to at least 262144 as described here:
+[ELASTIC](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites)
+\end{markdown}
+
+
 % \pagenumbering{roman}
 % \setcounter{page}{\thesavepage}
 
