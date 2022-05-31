@@ -17,4 +17,12 @@ and contains all routes of your API. It is for dev-purposes, so you can test all
 Your data is stored and collected from PostgreSQL and you are able to run CRUD statements for tables (Create, Read, Update, Delete).
 
 ## Setup
-The containers are created automatically when building the whole Docker containers. See `readme.MD` for instructions.
+The containers are created automatically when building all Docker containers. Run the following command in the projects root directory 
+in a terminal to build them:
+```shell
+docker-compose up -d --build
+```
+This builds all Docker containers specified in the `docker-compose.yml` file, which is located in the root directory of 
+this project.
+
+The associated Dockerfile is located in the `./src` folder of this directory.
