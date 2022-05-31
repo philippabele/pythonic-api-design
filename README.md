@@ -9,15 +9,17 @@ This project is a resource for future Python developers.
 ## Setup
 First, please install Docker Desktop from this [LINK](https://docs.docker.com/desktop/#download-and-install).\
 Open a terminal and build the Docker containers by running:
-```shell
+~~~~
 docker-compose up -d --build
-```
+~~~~
 
 
 ## Documentation
 
+- [Simple CRUD SQL][]
 - [Grafana][]
 - [Elasticsearch][]
 
-[Grafana]: 03_grafana_monitoring/readme.MD
-[Elasticsearch]: 02_simple_elastic_logging/readme.MD
+[Simple CRUD SQL]: https://github.com/philippabele/pythonic-api-design/blob/development/01_simple_crud_sql/crud-sql.MD
+[Grafana]: https://github.com/philippabele/pythonic-api-design/blob/development/03_grafana_monitoring/monitoring.MD
+[Elasticsearch]: https://github.com/philippabele/pythonic-api-design/blob/development/02_simple_elastic_logging/elastic.MD
