@@ -22,9 +22,7 @@ jobs:
           find .. -type f \( -iname '*.md' ! -iname "all.md" ! -iname "README.md"  \) | sort -k1 | xargs cat >> "$working_directory/chapters/all.md"
       - name: Copy images to graphics path
         run: |
-          find .. -type f \( -iname '*.png' \) | xargs cp -f -t "$working_directory/graphics/"
           find .. -type f \( -iname '*.png' \) | xargs cp -f -t "$working_directory/chapters/"
-          find .. -type f \( -iname '*.png' \) | xargs cp -f -t "$working_directory/"
           find . -type f \( -iname '*.jpg' -a ! -path "*/graphics/*" \)
         # add copy above
       - name: Compile LaTeX document
