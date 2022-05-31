@@ -23,7 +23,7 @@ jobs:
       - name: Copy images to graphics path
         run: |
           find .. -type f \( -iname '*.png' \) | xargs cp -f -t "$working_directory/"
-          find .. -type f \( -iname '*.jpg' -a ! -path "*/graphics/*" \) | xargs cp -f -t "$working_directory/"
+          find .. -type f \( -iname '*.jpg' -a ! -path "*/graphics/*" \) | xargs cp -f -t "$working_directory/" || echo "No .jpg files found"
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
