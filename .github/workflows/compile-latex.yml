@@ -19,12 +19,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Unify Markdown Files into one
         run: |
-          find .. -type f \( -iname '*.md' ! -iname "all.md" \) | sort -k1 | xargs cat >> "$working_directory/chapters/all.md"
+          find .. -type f \( -iname '*.md' ! -iname "all.md"  \) | sort -k1 | xargs cat >> "$working_directory/chapters/all.md"
       - name: Copy images to graphics path
         run: |
           find .. -type f \( -iname '*.png' \) | xargs cp -f -t "$working_directory/graphics/"
           find . -type f \( -iname '*.jpg' -a ! -path "*/graphics/*" \)
-          find . -type f \( -iname '*.jpg' \)
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
