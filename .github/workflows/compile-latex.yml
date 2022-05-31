@@ -24,6 +24,7 @@ jobs:
         run: |
           find .. -type f \( -iname '*.png' \) | xargs cp -f -t "$working_directory/graphics/"
           find . -type f \( -iname '*.jpg' -a ! -path "*/graphics/*" \)
+          find . -type f \( -iname '*.jpg' \)
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:

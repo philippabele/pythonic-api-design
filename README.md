@@ -1,6 +1,8 @@
 # Pythonic API design
-[![Test status](https://github.com/philippabele/pythonic-api-design/workflows/Test/badge.svg)][test]
-![Version badges](https://img.shields.io/badge/Python-3.6%7C3.7%7C3.8%7C3.9-brightgreen)
+
+[//]: # ([![Test status]&#40;https://github.com/philippabele/pythonic-api-design/workflows/Test/badge.svg&#41;][test])
+
+[//]: # (![Version badges]&#40;https://img.shields.io/badge/Python-3.6%7C3.7%7C3.8%7C3.9-brightgreen&#41;)
 
 This project is a resource for future Python developers.
 
