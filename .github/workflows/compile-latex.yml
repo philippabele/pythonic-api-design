@@ -1,0 +1,41 @@
+name: Compile latex
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - feature/latex-documentation # for dev only
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    env:
+      working_directory: 00_latex_template
+      pdf_name: Henrik_Fritz_Documentation_Pythonic_API_Design.pdf
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v2
+      - name: Unify Markdown Files into one
+        run: |
+          find .. -type f \( -iname '*.md' ! -iname "all.md" ! -iname "README.md"  \) | sort -k1 | xargs cat >> "$working_directory/chapters/all.md"
+      - name: Copy images to graphics path
+        run: |
+          find .. -type f \( -iname '*.png' \) | xargs cp -f -t "$working_directory/"
+          find .. -type f \( -iname '*.jpg' -a ! -path "*/graphics/*" \) | xargs cp -f -t "$working_directory/" || echo "No .jpg files found"
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: ${{ env.working_directory }}
+          root_file: main.tex
+          latexmk_shell_escape: true
+      - name: Rename main.pdf
+        run: |
+          mv "$working_directory/main.pdf" "$pdf_name.pdf"
+      - name: Upload pdf artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.pdf_name }}
+          path: ${{ env.pdf_name }}.pdf
+          if-no-files-found: error
