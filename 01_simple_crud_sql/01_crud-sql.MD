@@ -28,9 +28,9 @@ Update, Delete).
 The containers are created automatically when building all Docker containers. Run the following command in a terminal 
 in this directory to build them:
 
-```shell
+~~~~
 docker-compose up -d --build
-```
+~~~~
 
 This builds all Docker containers specified in the `docker-compose.yml` file.
 The associated Dockerfile is located in the `./src` folder of this directory.
