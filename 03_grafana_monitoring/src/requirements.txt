@@ -8,3 +8,6 @@ psycopg2-binary
 uvicorn
 starlette_prometheus
 starlette
+
+#dev
+requests

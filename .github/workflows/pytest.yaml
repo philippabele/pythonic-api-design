@@ -27,12 +27,6 @@ jobs:
         run: |
           cd 01_simple_crud_sql
           docker-compose up -d
-      - name: Test 01_simple_crud_sql with pytest
-        shell: 'script -q -e -c "bash {0}"'
-        run: |
-          docker ps
-          sleep 30
-          docker-compose exec apisql pytest src
       - name: Build 02_simple_elastic_logging
         run: |
           cd 02_simple_elastic_logging
@@ -50,8 +44,8 @@ jobs:
       - name: Test 02_simple_elastic_logging with pytest
         shell: 'script -q -e -c "bash {0}"'
         run: |
-          docker ps
           sleep 15
+          docker ps
           docker-compose exec api-logging pytest src
       - name: Test 03_grafana_monitoring with pytest
         shell: 'script -q -e -c "bash {0}"'

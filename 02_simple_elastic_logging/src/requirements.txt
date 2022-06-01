@@ -6,3 +6,6 @@ asyncpg
 psycopg2-binary
 uvicorn
 starlette
+
+#dev
+requests

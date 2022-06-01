@@ -7,3 +7,6 @@ databases[postgresql]
 psycopg2-binary
 uvicorn
 starlette
+
+#dev
+requests
