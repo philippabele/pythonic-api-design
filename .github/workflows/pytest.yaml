@@ -12,6 +12,14 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9, "3.10"]
+        dirs: ["01_simple_crud_sql", "02_simple_elastic_logging", "03_grafana_monitoring"]
+        include:
+          - dirs: "01_simple_crud_sql"
+            name: "api-sql"
+          - dirs: "02_simple_elastic_logging"
+            name: "api-logging"
+          - dirs: "03_grafana_monitoring"
+            name: "api-monitoring"
 
     steps:
       - uses: actions/checkout@v2
@@ -23,17 +31,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
-      - name: Build 01_simple_crud_sql
+      - name: Build ${{ matrix.dirs }}
         run: |
-          cd 01_simple_crud_sql
-          docker-compose up -d
-      - name: Build 02_simple_elastic_logging
-        run: |
-          cd 02_simple_elastic_logging
-          docker-compose up -d
-      - name: Build 03_grafana_monitoring
-        run: |
-          cd 03_grafana_monitoring
+          cd ${{ matrix.dirs }}
           docker-compose up -d
       - name: Lint with flake8
         run: |
@@ -41,18 +41,9 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Test 01_simple_crud_sql with pytest
+      - name: Test ${{ matrix.dirs }} with pytest
         shell: 'script -q -e -c "bash {0}"'
         run: |
           sleep 30
-          docker-compose exec api-sql pytest src
-      - name: Test 02_simple_elastic_logging with pytest
-        shell: 'script -q -e -c "bash {0}"'
-        run: |
-          sleep 15
-          docker-compose exec api-logging pytest src
-      - name: Test 03_grafana_monitoring with pytest
-        shell: 'script -q -e -c "bash {0}"'
-        run: |
-          sleep 15
-          docker-compose exec api-monitoring pytest src
+          cd ${{ matrix.dirs }}
+          docker-compose exec ${{ matrix.name }} pytest src
