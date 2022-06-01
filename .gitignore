@@ -130,4 +130,4 @@ dmypy.json
 
 /.idea
 
-*/ci/
+02_simple_elastic_logging/ci/
