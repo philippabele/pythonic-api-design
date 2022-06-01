@@ -41,11 +41,15 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Test 01_simple_crud_sql with pytest
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          sleep 30
+          docker-compose exec api-sql pytest src
       - name: Test 02_simple_elastic_logging with pytest
         shell: 'script -q -e -c "bash {0}"'
         run: |
           sleep 15
-          docker ps
           docker-compose exec api-logging pytest src
       - name: Test 03_grafana_monitoring with pytest
         shell: 'script -q -e -c "bash {0}"'
