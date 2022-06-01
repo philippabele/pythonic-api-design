@@ -9,7 +9,7 @@ services:
     volumes:
       - ./src/:/usr/src/
     ports:
-      - "8002:8000"
+      - "8001:8000"
     depends_on:
       - elasticsearch
     networks:
@@ -37,7 +37,6 @@ services:
         hard: -1
     ports:
       - "9200:9200"
-      - "9300:9300"
     networks:
       - es-net
 
