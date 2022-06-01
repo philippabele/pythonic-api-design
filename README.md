@@ -8,7 +8,7 @@ This project is a resource for future Python developers.
 
 ## Setup
 First, please install Docker Desktop from this [LINK](https://docs.docker.com/desktop/#download-and-install).\
-Open a terminal and build the Docker containers by running:
+Open a terminal and build all Docker containers by running:
 ~~~~
 docker-compose up -d --build
 ~~~~

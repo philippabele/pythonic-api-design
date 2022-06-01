@@ -20,28 +20,28 @@
 
 %Pseudocode defitition für Inline Code und CodeBlöcke
 \lstdefinelanguage{pseudo}{
-alsoletter={-,>,=,+,-,/,*,[,]},
+    alsoletter={-,>,=,+,-,/,*,[,]},
 %Types
-keywords=[1] { class, obj, void, bool, =, new, int, Comparable, Edge, Vertex, UndiVertex, UndiGraph, UndiEdge, initialise},
-keywordstyle=[1]\color{aquamarin}\bfseries,
+    keywords=[1] { class, obj, void, bool, =, new, int, Comparable, Edge, Vertex, UndiVertex, UndiGraph, UndiEdge, initialise},
+    keywordstyle=[1]\color{aquamarin}\bfseries,
 %Conditionals
-keywords=[2] { for, ->, if, while, ==, repeat, until, each, end},
-keywordstyle=[2]\color{orange}\bfseries,
+    keywords=[2] { for, ->, if, while, ==, repeat, until, each, end},
+    keywordstyle=[2]\color{orange}\bfseries,
 %Rest
-keywords=[3] { return },
-keywordstyle=[3]\color{purple}\bfseries,
+    keywords=[3] { return },
+    keywordstyle=[3]\color{purple}\bfseries,
 %Exception
-keywords=[4] { throw, exception },
-keywordstyle=[4]\color{red}\bfseries,
+    keywords=[4] { throw, exception },
+    keywordstyle=[4]\color{red}\bfseries,
 %Arrays
-keywords=[5] { [, ], null },
-keywordstyle=[5]\color{magenta}\bfseries,
+    keywords=[5] { [, ], null },
+    keywordstyle=[5]\color{magenta}\bfseries,
 %Comments
-morecomment=[l]{\#},
-commentstyle=\color{darkgreen}\bfseries,
-sensitive=false,
-stringstyle=\color{orange},
-identifierstyle=\color{aqua}
+    morecomment=[l]{\#},
+    commentstyle=\color{darkgreen}\bfseries,
+    sensitive=false,
+    stringstyle=\color{orange},
+    identifierstyle=\color{aqua}
 }
 
 \newcommand{\inlinecode}[1]{\colorbox{lightgray}{\lstinline[{language=pseudo,showstringspaces=false,basicstyle=\small\ttfamily\color{aqua},keywordstyle=\color{blue},commentstyle=\color[grey]{0.6},stringstyle=\color[RGB]{255,150,75}}]$#1$}}
@@ -66,27 +66,27 @@ identifierstyle=\color{aqua}
 \newcounter{countitems}
 \newcounter{nextitemizecount}
 \newcommand{\setupcountitems}{%
-  \stepcounter{nextitemizecount}%
-  \setcounter{countitems}{0}%
-  \preto\item{\stepcounter{countitems}}%
+    \stepcounter{nextitemizecount}%
+    \setcounter{countitems}{0}%
+    \preto\item{\stepcounter{countitems}}%
 }
 \makeatletter
 \newcommand{\computecountitems}{%
-  \edef\@currentlabel{\number\c@countitems}%
-  \label{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+    \edef\@currentlabel{\number\c@countitems}%
+    \label{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
 }
 \newcommand{\nextitemizecount}{%
-  \getrefnumber{countitems@\number\c@nextitemizecount}%
+    \getrefnumber{countitems@\number\c@nextitemizecount}%
 }
 \newcommand{\previtemizecount}{%
-  \getrefnumber{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+    \getrefnumber{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
 }
 \makeatother
 \newenvironment{AutoMultiColItemize}{%
-\ifnumcomp{\nextitemizecount}{>}{3}{\begin{multicols}{2}}{}
-\setupcountitems\begin{itemize}}%
-{\end{itemize}%
-\unskip\computecountitems\ifnumcomp{\previtemizecount}{>}{3}{\end{multicols}}{}}
+    \ifnumcomp{\nextitemizecount}{>}{3}{\begin{multicols}{2}}{}
+    \setupcountitems\begin{itemize}}%
+    {\end{itemize}%
+    \unskip\computecountitems\ifnumcomp{\previtemizecount}{>}{3}{\end{multicols}}{}}
 
 \begin{document}
 

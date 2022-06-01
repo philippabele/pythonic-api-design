@@ -1,4 +1,5 @@
 from typing import List
+
 from fastapi import APIRouter, HTTPException, Path
 from src.app.api import crud
 from src.app.api.models import NoteDB, NoteSchema
@@ -13,7 +14,7 @@ async def read_all_notes():
 
 @router.get("/{id}/", response_model=NoteDB)
 async def read_note(
-    id: int = Path(..., gt=0),
+        id: int = Path(..., gt=0),
 ):
     note = await crud.get(id)
     if not note:
@@ -35,8 +36,8 @@ async def create_note(payload: NoteSchema):
 
 @router.put("/{id}/", response_model=NoteDB)
 async def update_note(
-    payload: NoteSchema,
-    id: int = Path(..., gt=0),
+        payload: NoteSchema,
+        id: int = Path(..., gt=0),
 ):
     note = await crud.get(id)
     if not note:

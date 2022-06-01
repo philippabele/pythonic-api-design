@@ -1,9 +1,8 @@
 import os
 
+from databases import Database
 from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, create_engine
 from sqlalchemy.sql import func
-
-from databases import Database
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 

@@ -1,0 +1,9 @@
+fastapi
+SQLAlchemy
+pydantic
+pytest
+asyncpg
+databases[postgresql]
+psycopg2-binary
+uvicorn
+starlette_prometheus

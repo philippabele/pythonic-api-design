@@ -1,0 +1,7 @@
+fastapi
+elasticsearch
+pydantic
+pytest
+asyncpg
+psycopg2-binary
+uvicorn

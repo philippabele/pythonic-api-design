@@ -1,6 +1,6 @@
+from pydantic import BaseModel, Field
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from pydantic import BaseModel, Field
 from src.app.sql.database import Base
 
 
