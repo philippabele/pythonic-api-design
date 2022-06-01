@@ -28,9 +28,9 @@ The containers are created automatically when building all Docker containers. Ru
 root directory
 in a terminal to build them:
 
-```shell
+~~~~
 docker-compose up -d --build
-```
+~~~~
 
 This builds all Docker containers specified in the `docker-compose.yml` file, which is located in the root directory of
 this project.\
