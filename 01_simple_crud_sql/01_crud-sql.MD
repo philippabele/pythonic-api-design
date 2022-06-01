@@ -16,9 +16,8 @@ specified in environment variables in the `docker-compose.yml` below the service
 
 ## Use case
 
-Interact with FastAPI via SwaggerUI, which is available at `http://localhost:8002/docs`. FastAPI builds this interface
-automatically
-and contains all routes of your API. It is for dev-purposes, so you can test all routes there.
+Interact with FastAPI via SwaggerUI, which is available at `http://localhost:8000/docs`. FastAPI builds this interface
+automatically and contains all routes of your API. It is for dev-purposes, so you can test all routes there.
 
 Your data is stored and collected from PostgreSQL and you are able to run CRUD statements for tables (Create, Read,
 Update, Delete).

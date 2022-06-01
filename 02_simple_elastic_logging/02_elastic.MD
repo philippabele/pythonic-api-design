@@ -25,21 +25,20 @@ called:
 ## Setup
 
 The containers are created automatically when building all Docker containers. Run the following command in the projects
-root directory
-in a terminal to build them:
+root directory in a terminal to build them:
 
 ~~~~
 docker-compose up -d --build
 ~~~~
 
 This builds all Docker containers specified in the `docker-compose.yml` file, which is located in the root directory of
-this project.\
+this project.  
 The associated Dockerfile is `Dockerfile-ES`.
 
 There may occur an error regarding `vm.max_map_count` value, which is to low out of the box. There is an official guide
 on the elastic website,
 which shows how to set `vm.max_map_count` to at least `262144`:
-[Elastic Link](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites)\
+[Elastic Link](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites)  
 Copy and paste the commands depending on your OS and used software.
 
 ### Kibana
