@@ -5,6 +5,7 @@ import pytest
 from src.app.api import crud
 
 
+# testing create note
 def test_create_note(test_app, monkeypatch):
     test_request_payload = {"title": "something", "description": "something else"}
     test_response_payload = {
@@ -27,6 +28,7 @@ def test_create_note(test_app, monkeypatch):
     assert response.json() == test_response_payload
 
 
+# test invalid response, missing id
 def test_create_note_invalid_json(test_app):
     response = test_app.post("/notes/", data=json.dumps({"title": "something"}))
     assert response.status_code == 422
@@ -37,6 +39,7 @@ def test_create_note_invalid_json(test_app):
     assert response.status_code == 422
 
 
+# test reading note
 def test_read_note(test_app, monkeypatch):
     test_data = {"id": 1, "title": "something", "description": "something else"}
 
@@ -50,6 +53,7 @@ def test_read_note(test_app, monkeypatch):
     assert response.json() == test_data
 
 
+# test reading note with not available id
 def test_read_note_incorrect_id(test_app, monkeypatch):
     async def mock_get(id):
         return None
@@ -64,6 +68,7 @@ def test_read_note_incorrect_id(test_app, monkeypatch):
     assert response.status_code == 422
 
 
+# test reading all notes
 def test_read_all_notes(test_app, monkeypatch):
     test_data = [
         {"title": "something", "description": "something else", "id": 1},
@@ -80,6 +85,7 @@ def test_read_all_notes(test_app, monkeypatch):
     assert response.json() == test_data
 
 
+# test updating existing note
 def test_update_note(test_app, monkeypatch):
     test_update_data = {"title": "someone", "description": "someone else", "id": 1}
 
@@ -109,6 +115,7 @@ def test_update_note(test_app, monkeypatch):
         [0, {"title": "foo", "description": "bar"}, 422],
     ],
 )
+# test updating note with statements that should fail
 def test_update_note_invalid(test_app, monkeypatch, id, payload, status_code):
     async def mock_get(id):
         return None
@@ -122,6 +129,7 @@ def test_update_note_invalid(test_app, monkeypatch, id, payload, status_code):
     assert response.status_code == status_code
 
 
+# test removing specific note
 def test_remove_note(test_app, monkeypatch):
     test_data = {"title": "something", "description": "something else", "id": 1}
 
@@ -140,6 +148,7 @@ def test_remove_note(test_app, monkeypatch):
     assert response.json() == test_data
 
 
+# test deleting note with not available id
 def test_remove_note_incorrect_id(test_app, monkeypatch):
     async def mock_get(id):
         return None
