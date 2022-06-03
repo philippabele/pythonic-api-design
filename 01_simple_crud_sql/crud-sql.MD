@@ -19,9 +19,9 @@ Your data is stored and collected from PostgreSQL and you are able to run CRUD s
 ## Setup
 The containers are created automatically when building all Docker containers. Run the following command in the projects root directory 
 in a terminal to build them:
-```shell
+~~~~
 docker-compose up -d --build
-```
+~~~~
 This builds all Docker containers specified in the `docker-compose.yml` file, which is located in the root directory of 
 this project.
 
