@@ -3,6 +3,7 @@ elasticsearch
 SQLAlchemy
 pydantic
 pytest
+pre-commit
 asyncpg
 databases[postgresql]
 psycopg2-binary

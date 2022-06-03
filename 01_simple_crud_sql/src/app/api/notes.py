@@ -18,7 +18,7 @@ async def read_all_notes():
 # router to get one specific note
 @router.get("/{id}/", response_model=NoteDB)
 async def read_note(
-        # get the id parameter from url
+    # get the id parameter from url
     id: int = Path(..., gt=0),
 ):
     # get content of note
