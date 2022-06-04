@@ -1,4 +1,5 @@
 from typing import List
+
 from fastapi import APIRouter, HTTPException, Path
 from src.app.api import crud
 from src.app.api.models import NoteDB, NoteSchema

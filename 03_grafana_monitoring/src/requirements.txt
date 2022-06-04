@@ -1,5 +1,4 @@
 fastapi
-elasticsearch
 SQLAlchemy
 pydantic
 pytest
@@ -10,5 +9,5 @@ uvicorn
 starlette_prometheus
 starlette
 
-# dev
+#dev
 requests

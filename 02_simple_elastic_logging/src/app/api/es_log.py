@@ -4,7 +4,6 @@ from fastapi import APIRouter
 from src.app.api.models import EsLogSchema
 from src.app.elasticsearch import ESClient
 
-
 esclient = ESClient()
 esclient.startup()
 
