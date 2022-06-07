@@ -1,5 +1,6 @@
-from .models import NoteSchema
 from src.app.db import notes, database
+
+from .models import NoteSchema
 
 
 # these functions interact with the database and are executed, if their corresponding FastAPI route is called

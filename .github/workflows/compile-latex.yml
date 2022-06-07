@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - feature/latex-documentation # for dev only
+      - development # for dev only
 
 jobs:
   compile:

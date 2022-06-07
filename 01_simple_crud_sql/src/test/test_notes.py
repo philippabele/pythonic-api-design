@@ -1,7 +1,6 @@
 import json
 
 import pytest
-
 from src.app.api import crud
 
 
