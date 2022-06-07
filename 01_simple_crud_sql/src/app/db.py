@@ -1,12 +1,14 @@
 import os
 
-from databases import Database
 from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, create_engine
 from sqlalchemy.sql import func
 
+from databases import Database
+
+# get environment variable DATABASE_URL (declared in docker-compose.yml)
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# SQLAlchemy
+# create database schema
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
 notes = Table(
