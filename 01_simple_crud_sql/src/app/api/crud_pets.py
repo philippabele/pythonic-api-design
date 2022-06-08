@@ -6,6 +6,7 @@ from src.app.models.pet import PetSchema
 
 # these functions interact with the database and are executed, if their corresponding FastAPI route is called
 
+
 class PetSchemaDb:
     id: int
     category_id: int
@@ -19,12 +20,9 @@ def parse_database_response(resp: List[PetSchemaDb]):
     for element in resp:
         temp_obj: PetSchema = {
             "id": element.id,
-            "category": {
-                "id": element.category_id,
-                "name": element.category_name
-            },
+            "category": {"id": element.category_id, "name": element.category_name},
             "name": element.name,
-            "status": element.status
+            "status": element.status,
         }
         temp_list.append(temp_obj)
     return temp_list
@@ -33,8 +31,12 @@ def parse_database_response(resp: List[PetSchemaDb]):
 # declare notes post route: insert a new note
 async def post(payload: PetSchema):
     # build a sql query
-    query = petstore.insert().values(name=payload.name, status=payload.status, category_id=payload.category.id,
-                                     category_name=payload.category.name)
+    query = petstore.insert().values(
+        name=payload.name,
+        status=payload.status,
+        category_id=payload.category.id,
+        category_name=payload.category.name,
+    )
     # return the answer of the database execution
     return await database.execute(query=query)
 
@@ -42,8 +44,17 @@ async def post(payload: PetSchema):
 # declare notes post route: insert a new note
 async def update(payload: PetSchema):
     # build a sql query
-    query = petstore.update().where(payload.id == petstore.c.id).values(name=payload.name, status=payload.status, category_id=payload.category.id,
-                                     category_name=payload.category.name).returning(petstore.c.id)
+    query = (
+        petstore.update()
+        .where(payload.id == petstore.c.id)
+        .values(
+            name=payload.name,
+            status=payload.status,
+            category_id=payload.category.id,
+            category_name=payload.category.name,
+        )
+        .returning(petstore.c.id)
+    )
     # return the answer of the database execution
     resp = await database.execute(query=query)
     return resp
@@ -52,7 +63,12 @@ async def update(payload: PetSchema):
 # declare notes post route: insert a new note
 async def update_fields(petId: int, name: str, status: str):
     # build a sql query
-    query = petstore.update().where(petId == petstore.c.id).values(name=name, status=status).returning(petstore.c.id)
+    query = (
+        petstore.update()
+        .where(petId == petstore.c.id)
+        .values(name=name, status=status)
+        .returning(petstore.c.id)
+    )
     # return the answer of the database execution
     return await database.execute(query=query)
 
@@ -64,12 +80,9 @@ async def get(id: int):
     if resp:
         temp_obj: PetSchema = {
             "id": resp.id,
-            "category": {
-                "id": resp.category_id,
-                "name": resp.category_name
-            },
+            "category": {"id": resp.category_id, "name": resp.category_name},
             "name": resp.name,
-            "status": resp.status
+            "status": resp.status,
         }
         return temp_obj
     else:
@@ -91,8 +104,12 @@ async def put(payload: PetSchema):
     query = (
         petstore.update()
         .where(id == petstore.c.id)
-        .values(name=payload.name, status=payload.status, category_id=payload.category.id,
-                category_name=payload.category.name)
+        .values(
+            name=payload.name,
+            status=payload.status,
+            category_id=payload.category.id,
+            category_name=payload.category.name,
+        )
         .returning(petstore.c.id)
     )
     return await database.execute(query=query)

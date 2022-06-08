@@ -10,7 +10,9 @@ router = APIRouter()
 
 
 # router to get all pets by their status
-@router.get("/findByStatus", response_model=List[PetSchema], description="Find pet by status")
+@router.get(
+    "/findByStatus", response_model=List[PetSchema], description="Find pet by status"
+)
 async def get_pet_by_status(status: PetStatus):
     # call the get_all() function declared in crud_pets.py
     if status == PetStatus.available:
@@ -38,24 +40,31 @@ async def read_pet(
 
 
 # router to create a new pet
-@router.post("/", response_model=PetSchema, status_code=201, description="Add a new pet to the store")
+@router.post(
+    "/",
+    response_model=PetSchema,
+    status_code=201,
+    description="Add a new pet to the store",
+)
 async def create_pet(payload: PetSchema):
     pet_id = await crud_pets.post(payload)
 
     # build the response object, which contains the answer of the database call
     response_object = {
         "id": pet_id,
-        "category": {
-            "id": payload.category.id,
-            "name": payload.category.name
-        },
+        "category": {"id": payload.category.id, "name": payload.category.name},
         "name": payload.name,
-        "status": payload.status
+        "status": payload.status,
     }
     return response_object
 
 
-@router.post("/{petId}", response_model=UpdatePet, status_code=201, description="Updates a pet in the store with form data")
+@router.post(
+    "/{petId}",
+    response_model=UpdatePet,
+    status_code=201,
+    description="Updates a pet in the store with form data",
+)
 async def update_pet_form(petId: int, name: str, status: str):
     # async def update_pet_form(petId: int = Query(None, description="Update pets id"),
     #                           name: str = Query(None, description="Type the new name"),
@@ -84,9 +93,7 @@ async def update_pet(payload: PetSchema):
     if not pet_id:
         raise HTTPException(status_code=404, detail="Pet not found")
 
-    response_object = {
-        "id": pet_id
-    }
+    response_object = {"id": pet_id}
     return response_object
 
 

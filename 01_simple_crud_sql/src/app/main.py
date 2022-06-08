@@ -9,13 +9,8 @@ from src.app.db import database, engine, metadata
 metadata.create_all(engine)
 
 tags_metadata = [
-    {
-        "name": "notes",
-        "description": "Store your notes"
-    }, {
-        "name": "petstore",
-        "description": "This is a pet store."
-    }
+    {"name": "notes", "description": "Store your notes"},
+    {"name": "petstore", "description": "This is a pet store."},
 ]
 # create FastAPI application
 app = FastAPI(title="Simple CRUD SQL", openapi_tags=tags_metadata)
