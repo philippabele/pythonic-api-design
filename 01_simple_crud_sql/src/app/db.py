@@ -1,6 +1,6 @@
 import os
 
-from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, create_engine
+from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, create_engine, ARRAY, JSON
 from sqlalchemy.sql import func
 
 from databases import Database
@@ -17,6 +17,19 @@ notes = Table(
     Column("id", Integer, primary_key=True),
     Column("title", String(50)),
     Column("description", String(50)),
+    Column("created_date", DateTime, default=func.now(), nullable=False),
+)
+
+petstore = Table(
+    "petstore",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("category_id", Integer),
+    Column("category_name", String(50)),
+    Column("name", String(50)),
+    # Column("photoUrls", ARRAY(String)),
+    # Column("tags", ARRAY(JSON)),
+    Column("status", String(50)),
     Column("created_date", DateTime, default=func.now(), nullable=False),
 )
 

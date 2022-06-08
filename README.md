@@ -27,10 +27,10 @@ They are also linked below.
 ## Documentation
 
 - [Simple CRUD SQL][]
-- [Grafana][]
 - [Elasticsearch][]
+- [Grafana][]
 
 
-[Simple CRUD SQL]: https://github.com/philippabele/pythonic-api-design/blob/development/01_simple_crud_sql/crud-sql.MD
-[Grafana]: https://github.com/philippabele/pythonic-api-design/blob/development/03_grafana_monitoring/monitoring.MD
-[Elasticsearch]: https://github.com/philippabele/pythonic-api-design/blob/development/02_simple_elastic_logging/elastic.MD
+[Simple CRUD SQL]: https://github.com/philippabele/pythonic-api-design/blob/development/01_simple_crud_sql/01_crud-sql.MD
+[Elasticsearch]: https://github.com/philippabele/pythonic-api-design/blob/development/02_simple_elastic_logging/02_elastic.MD
+[Grafana]: https://github.com/philippabele/pythonic-api-design/blob/development/03_grafana_monitoring/03_monitoring.MD
