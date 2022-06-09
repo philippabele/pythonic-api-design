@@ -22,11 +22,11 @@ async def get_pet_by_status(status: PetStatus):
     elif status == PetStatus.sold:
         return await crud_pets.get_by_status("sold")
     else:
-        raise HTTPException(status_code=404, detail="Status not found")
+        raise HTTPException(status_code=404, detail="status not found")
 
 
 # router to get one specific pet
-@router.get("/{petId}", response_model=Any, summary="Get a pet by ID")
+@router.get("/{petId}", response_model=Any, summary="Get a pet by ID", status_code=200)
 async def read_pet(
     # get the id parameter from url
     petId: int = Path(..., gt=0),
@@ -74,7 +74,7 @@ async def update_pet_form(petId: int, name: str, status: str):
     print(db_response)
     if not db_response:
         # raise an exception, if specific pet was not found in the database
-        raise HTTPException(status_code=404, detail="Pet not updated")
+        raise HTTPException(status_code=404, detail="pet not updated")
 
     # build the response object, which contains the answer of the database call
     response_object = {
@@ -91,7 +91,7 @@ async def update_pet(payload: PetSchema):
     pet_id = await crud_pets.update(payload)
 
     if not pet_id:
-        raise HTTPException(status_code=404, detail="Pet not found")
+        raise HTTPException(status_code=404, detail="pet not found")
 
     response_object = {"id": pet_id}
     return response_object
@@ -102,7 +102,7 @@ async def update_pet(payload: PetSchema):
 async def delete_pet(petId: int = Path(..., gt=0, description="Pet id to delete")):
     pet = await crud_pets.get(petId)
     if not pet:
-        raise HTTPException(status_code=404, detail="Pet not found")
+        raise HTTPException(status_code=404, detail="pet not found")
 
     await crud_pets.delete(petId)
 
