@@ -7,22 +7,16 @@ from src.app.api import crud_pets
 # testing create pet
 def test_create_pet(test_app, monkeypatch):
     test_request_payload = {
-      "id": 1,
-      "category": {
         "id": 1,
-        "name": "cat"
-      },
-      "name": "Citty",
-      "status": "available"
+        "category": {"id": 1, "name": "cat"},
+        "name": "Citty",
+        "status": "available",
     }
     test_response_payload = {
         "id": 1,
-        "category": {
-            "id": 1,
-            "name": "cat"
-        },
+        "category": {"id": 1, "name": "cat"},
         "name": "Citty",
-        "status": "available"
+        "status": "available",
     }
 
     async def mock_post(payload):
@@ -54,12 +48,9 @@ def test_create_pet_invalid_json(test_app):
 def test_read_pet(test_app, monkeypatch):
     test_response_payload = {
         "id": 1,
-        "category": {
-            "id": 1,
-            "name": "cat"
-        },
+        "category": {"id": 1, "name": "cat"},
         "name": "Citty",
-        "status": "available"
+        "status": "available",
     }
 
     async def mock_get(id):
@@ -88,15 +79,14 @@ def test_read_pet_incorrect_id(test_app, monkeypatch):
 # test reading all pets
 def test_read_pet_by_status(test_app, monkeypatch):
     test_read_status = {"status": "available"}
-    test_data_status = [{
-        "id": 1,
-        "category": {
+    test_data_status = [
+        {
             "id": 1,
-            "name": "cat"
-        },
-        "name": "Citty",
-        "status": "available"
-    }]
+            "category": {"id": 1, "name": "cat"},
+            "name": "Citty",
+            "status": "available",
+        }
+    ]
 
     async def mock_get_all(*args, **kwargs):
         return test_read_status
