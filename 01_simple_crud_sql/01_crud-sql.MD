@@ -4,6 +4,13 @@ This example is built on FastAPI, which is a web framework for building APIs wit
 programming.
 The API stores data in PostgreSQL, a SQL database.
 
+There are two examples for a CRUD application, the first one is called `notes` and the second one `petstore`.
+
+`Petstore` simulates a pet store - you can add pets, modify and delete them. This is the more advanced example but a 
+classic one for APIs.
+
+`Notes` is a simpler one, you can store your notes there. 
+
 ## Architecture
 
 Two containers are specified in the `docker-compose.yml` in this directory:

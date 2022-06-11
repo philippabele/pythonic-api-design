@@ -1,7 +1,4 @@
-from fastapi import FastAPI, Request, status
-from fastapi.responses import JSONResponse
-from fastapi.exceptions import RequestValidationError
-from starlette.exceptions import HTTPException as StarletteHTTPException
+from fastapi import FastAPI
 from src.app.routers import notes, pets
 from src.app.db import database, engine, metadata
 
@@ -26,20 +23,6 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     await database.disconnect()
-
-
-@app.exception_handler(StarletteHTTPException)
-def not_found_exception_handler(request: Request, exc: StarletteHTTPException):
-    return JSONResponse(
-        status_code=status.HTTP_404_NOT_FOUND, content={"detail": exc.detail}
-    )
-
-
-@app.exception_handler(RequestValidationError)
-def relation_not_found_exception_handler(request: Request, exc: RequestValidationError):
-    return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"detail": exc}
-    )
 
 
 # include FastAPI routers for notes & pets, which are defined in other files
