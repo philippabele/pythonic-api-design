@@ -89,7 +89,7 @@ def test_read_pet_by_status(test_app, monkeypatch):
     ]
 
     async def mock_get_all(*args, **kwargs):
-        return test_read_status
+        return None
 
     monkeypatch.setattr(crud_pets, "get_by_status", mock_get_all)
 
@@ -181,7 +181,7 @@ def test_remove_pet_incorrect_id(test_app, monkeypatch):
     async def mock_get(id):
         return None
 
-    monkeypatch.setattr(crud_pets, "get", mock_get)
+    monkeypatch.setattr(crud_pets, "delete", mock_get)
 
     response = test_app.delete("/petstore/999/")
     assert response.status_code == 404
