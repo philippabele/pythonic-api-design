@@ -19,7 +19,7 @@ def test_create_pet(test_app, monkeypatch):
         "status": "available",
     }
 
-    async def mock_post(payload):
+    async def mock_post(id):
         return 1
 
     monkeypatch.setattr(crud_pets, "post", mock_post)
@@ -53,9 +53,6 @@ def test_read_pet(test_app, monkeypatch):
         "status": "available",
     }
 
-    async def mock_get(id):
-        return test_response_payload
-
     response = test_app.get("/petstore/1")
     assert response.status_code == 200
     assert response.json() == test_response_payload
@@ -63,22 +60,21 @@ def test_read_pet(test_app, monkeypatch):
 
 # test reading pet with not available id
 def test_read_pet_incorrect_id(test_app, monkeypatch):
-    async def mock_get(id):
-        return None
-
-    monkeypatch.setattr(crud_pets, "get", mock_get)
 
     response = test_app.get("/petstore/999")
     assert response.status_code == 404
     assert response.json()["detail"] == "pet not found"
 
-    response = test_app.get("/petstore/1")
-    assert response.status_code == 404
-
 
 # test reading all pets
 def test_read_pet_by_status(test_app, monkeypatch):
-    test_read_status = {"status": "available"}
+    test_request_payload = {
+        "id": 1,
+        "category": {"id": 1, "name": "cat"},
+        "name": "Citty",
+        "status": "available",
+    }
+
     test_data_status = [
         {
             "id": 1,
@@ -88,8 +84,8 @@ def test_read_pet_by_status(test_app, monkeypatch):
         }
     ]
 
-    async def mock_get_all(*args, **kwargs):
-        return None
+    async def mock_get_all(id):
+        return test_data_status
 
     monkeypatch.setattr(crud_pets, "get_by_status", mock_get_all)
 
@@ -150,10 +146,10 @@ def test_update_pet(test_app, monkeypatch):
 )
 # test updating pet with statements that should fail
 def test_update_pet_invalid(test_app, monkeypatch, payload, status_code):
-    async def mock_get(id):
+    async def mock_update(id):
         return None
 
-    monkeypatch.setattr(crud_pets, "get", mock_get)
+    monkeypatch.setattr(crud_pets, "get", mock_update)
 
     response = test_app.put(
         f"/petstore/",
@@ -164,7 +160,18 @@ def test_update_pet_invalid(test_app, monkeypatch, payload, status_code):
 
 # test removing specific pet
 def test_remove_pet(test_app, monkeypatch):
+    test_request_payload = {
+        "id": 1,
+        "category": {"id": 1, "name": "cat"},
+        "name": "Citty",
+        "status": "available",
+    }
     test_data = {"id": 1}
+
+    async def mock_get(id):
+        return test_request_payload
+
+    monkeypatch.setattr(crud_pets, "get", mock_get)
 
     async def mock_delete(id):
         return id
@@ -176,12 +183,12 @@ def test_remove_pet(test_app, monkeypatch):
     assert response.json() == test_data
 
 
-# test deleting pet with not available id
+# test deleting pet with an id, that's not available
 def test_remove_pet_incorrect_id(test_app, monkeypatch):
     async def mock_get(id):
         return None
 
-    monkeypatch.setattr(crud_pets, "delete", mock_get)
+    monkeypatch.setattr(crud_pets, "get", mock_get)
 
     response = test_app.delete("/petstore/999/")
     assert response.status_code == 404

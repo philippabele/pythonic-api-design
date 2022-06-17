@@ -21,6 +21,9 @@ docker-compose up -d --build
 ~~~~
 
 <br>
+It is recommended to open an example in a new window of your favourite editor (IDE) to benefit from project structure 
+features.
+
 There are detailed guides for each example. These are Markdown .md files and can be found in each sub-folder.
 They are also linked below. 
 
