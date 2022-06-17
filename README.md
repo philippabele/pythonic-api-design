@@ -26,13 +26,17 @@ They are also linked below.
 
 ## Documentation
 
+- [Hello world FastAPI][]
 - [Async API][]
+- [Pydantic models][]
 - [Simple CRUD SQL][]
 - [Grafana][]
 - [Elasticsearch][]
 
 
+[Hello world FastAPI]: https://github.com/philippabele/pythonic-api-design/blob/development/04_hello_world_api/04_hello_fastapi.MD
 [Async API]: https://github.com/philippabele/pythonic-api-design/blob/development/05_async_fastapi/05_async_fastapi.MD
 [Simple CRUD SQL]: https://github.com/philippabele/pythonic-api-design/blob/development/01_simple_crud_sql/crud-sql.MD
 [Grafana]: https://github.com/philippabele/pythonic-api-design/blob/development/03_grafana_monitoring/monitoring.MD
 [Elasticsearch]: https://github.com/philippabele/pythonic-api-design/blob/development/02_simple_elastic_logging/elastic.MD
+[Pydantic models]: https://github.com/philippabele/pythonic-api-design/blob/development/06_pydantic_modelling_fastapi/06_pydantic-api.MD
