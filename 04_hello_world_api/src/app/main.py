@@ -19,5 +19,5 @@ async def root() -> dict:
 async def sqrt(number: float) -> dict:
     if number < 0.0:
         raise HTTPException(status_code=400, detail="Wrong input")
-    res = number ** 0.5
+    res = number**0.5
     return {"result": res}
