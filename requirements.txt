@@ -1,15 +1,15 @@
-fastapi
-elasticsearch
-SQLAlchemy
-pydantic
-pytest
-pre-commit
+fastapi~=0.70.0
+elasticsearch~=8.2.2
+SQLAlchemy~=1.4.37
+pydantic~=1.8.2
+pytest~=6.2.5
+pre-commit~=2.17.0
 asyncpg
-databases[postgresql]
+databases[postgresql]~=0.6.0
 psycopg2-binary
-uvicorn
+uvicorn~=0.15.0
 starlette_prometheus
-starlette
+starlette~=0.16.0
 
 # dev
-requests
+requests~=2.26.0

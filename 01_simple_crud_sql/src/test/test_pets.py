@@ -53,6 +53,11 @@ def test_read_pet(test_app, monkeypatch):
         "status": "available",
     }
 
+    async def mock_get(id):
+        return test_response_payload
+
+    monkeypatch.setattr(crud_pets, "get", mock_get)
+
     response = test_app.get("/petstore/1")
     assert response.status_code == 200
     assert response.json() == test_response_payload
@@ -60,6 +65,10 @@ def test_read_pet(test_app, monkeypatch):
 
 # test reading pet with not available id
 def test_read_pet_incorrect_id(test_app, monkeypatch):
+    async def mock_get(id):
+        return None
+
+    monkeypatch.setattr(crud_pets, "get", mock_get)
 
     response = test_app.get("/petstore/999")
     assert response.status_code == 404
@@ -84,10 +93,10 @@ def test_read_pet_by_status(test_app, monkeypatch):
         }
     ]
 
-    async def mock_get_all(id):
+    async def mock_by_status(id):
         return test_data_status
 
-    monkeypatch.setattr(crud_pets, "get_by_status", mock_get_all)
+    monkeypatch.setattr(crud_pets, "get_by_status", mock_by_status)
 
     response = test_app.get("/petstore/findByStatus?status=available")
     assert response.status_code == 200
@@ -98,9 +107,9 @@ def test_read_pet_by_status(test_app, monkeypatch):
 def test_update_pet(test_app, monkeypatch):
     test_update_data = {
         "id": 1,
+        "category": {"id": 1, "name": "cat"},
         "name": "Citty",
         "status": "pending",
-        "category": {"id": 1, "name": "cat"},
     }
 
     async def mock_get(id):
