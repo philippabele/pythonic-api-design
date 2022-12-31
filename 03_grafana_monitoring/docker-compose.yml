@@ -1,0 +1,47 @@
+services:
+  api-monitoring:
+    build:
+      context: src
+      dockerfile: Dockerfile
+    container_name: api-monitoring
+    command: |
+      bash -c 'uvicorn src.app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
+    volumes:
+      - ./src/:/usr/src/
+    ports:
+      - "8002:8000"
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: always
+    container_name: prometheus-monitoring
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-monitoring
+    restart: always
+    user: "472" # 472 or 104
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    env_file:
+      - ./config.monitoring
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge

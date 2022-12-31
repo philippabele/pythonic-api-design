@@ -11,7 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.7, 3.8, 3.9, "3.10"]
+        dirs: ["01_simple_crud_sql", "02_simple_elastic_logging", "03_grafana_monitoring"]
+        include:
+          - dirs: "01_simple_crud_sql"
+            name: "api-sql"
+          - dirs: "02_simple_elastic_logging"
+            name: "api-logging"
+          - dirs: "03_grafana_monitoring"
+            name: "api-monitoring"
 
     steps:
       - uses: actions/checkout@v2
@@ -23,13 +31,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Build ${{ matrix.dirs }}
+        run: |
+          cd ${{ matrix.dirs }}
+          docker-compose up -d
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Test with pytest
+      - name: Test ${{ matrix.dirs }} with pytest
+        shell: 'script -q -e -c "bash {0}"'
         run: |
-          pytest
+          sleep 30
+          cd ${{ matrix.dirs }}
+          docker-compose exec ${{ matrix.name }} pytest src

@@ -128,4 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/.idea
+**/.idea/
+
+02_simple_elastic_logging/ci/

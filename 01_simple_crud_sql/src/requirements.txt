@@ -1,16 +1,12 @@
 fastapi
-elasticsearch
 SQLAlchemy
 pydantic
 pytest
-pre-commit
 asyncpg
 databases[postgresql]
 psycopg2-binary
 uvicorn
-starlette_prometheus
 starlette
-httpx
 
-# dev
+#dev
 requests

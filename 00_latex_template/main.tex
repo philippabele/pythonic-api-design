@@ -1,0 +1,155 @@
+\documentclass[english, 12pt, a4paper]{article}
+
+\usepackage{preamble/packages}
+\graphicspath{graphics/}
+
+
+\titleformat{\chapter}[display]{\bfseries\LARGE}{\bfseries\LARGE\thechapter}{1ex}{}
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
+\titleformat*{\paragraph}{\large\bfseries}
+\titleformat*{\subparagraph}{\normalsize\bfseries}
+
+%Inline Code Environment>
+
+\definecolor{lightgray}{gray}{0.95}
+\definecolor{aqua}{HTML}{003134}
+\definecolor{aquamarin}{HTML}{00aeb7}
+\definecolor{darkgreen}{HTML}{00bd06}
+
+%Pseudocode defitition für Inline Code und CodeBlöcke
+\lstdefinelanguage{pseudo}{
+    alsoletter={-,>,=,+,-,/,*,[,]},
+%Types
+    keywords=[1] { class, obj, void, bool, =, new, int, Comparable, Edge, Vertex, UndiVertex, UndiGraph, UndiEdge, initialise},
+    keywordstyle=[1]\color{aquamarin}\bfseries,
+%Conditionals
+    keywords=[2] { for, ->, if, while, ==, repeat, until, each, end},
+    keywordstyle=[2]\color{orange}\bfseries,
+%Rest
+    keywords=[3] { return },
+    keywordstyle=[3]\color{purple}\bfseries,
+%Exception
+    keywords=[4] { throw, exception },
+    keywordstyle=[4]\color{red}\bfseries,
+%Arrays
+    keywords=[5] { [, ], null },
+    keywordstyle=[5]\color{magenta}\bfseries,
+%Comments
+    morecomment=[l]{\#},
+    commentstyle=\color{darkgreen}\bfseries,
+    sensitive=false,
+    stringstyle=\color{orange},
+    identifierstyle=\color{aqua}
+}
+
+\newcommand{\inlinecode}[1]{\colorbox{lightgray}{\lstinline[{language=pseudo,showstringspaces=false,basicstyle=\small\ttfamily\color{aqua},keywordstyle=\color{blue},commentstyle=\color[grey]{0.6},stringstyle=\color[RGB]{255,150,75}}]$#1$}}
+
+\newcommand{\subhead}[1]{{\vspace{2ex} \textbf{#1} \vspace{2ex}}}
+
+% <Inline Code Environment
+
+%%% Header Stuff>
+
+% \pagestyle{fancy}
+% \fancyhf{} % sets both header and footer to nothing
+% \renewcommand{\headrulewidth}{0pt}
+% \rhead{\begin{picture}(0,0) \put(0,0){\includegraphics[width=1.5cm]{graphics/cdc.png}} \end{picture}}
+
+%%% <Header Stuff
+
+
+\makeglossaries
+\input{preamble/glossary}
+
+\newcounter{countitems}
+\newcounter{nextitemizecount}
+\newcommand{\setupcountitems}{%
+    \stepcounter{nextitemizecount}%
+    \setcounter{countitems}{0}%
+    \preto\item{\stepcounter{countitems}}%
+}
+\makeatletter
+\newcommand{\computecountitems}{%
+    \edef\@currentlabel{\number\c@countitems}%
+    \label{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\newcommand{\nextitemizecount}{%
+    \getrefnumber{countitems@\number\c@nextitemizecount}%
+}
+\newcommand{\previtemizecount}{%
+    \getrefnumber{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\makeatother
+\newenvironment{AutoMultiColItemize}{%
+    \ifnumcomp{\nextitemizecount}{>}{3}{\begin{multicols}{2}}{}
+    \setupcountitems\begin{itemize}}%
+    {\end{itemize}%
+    \unskip\computecountitems\ifnumcomp{\previtemizecount}{>}{3}{\end{multicols}}{}}
+
+\begin{document}
+
+\newcounter{savepage}
+
+\include{preamble/titlepage}
+
+\clearpage
+
+\pagenumbering{roman}
+
+% \begin{abstract}
+%     \subfile{preamble/abstract.tex}
+% \end{abstract}
+
+\clearpage
+
+\setcounter{tocdepth}{2}
+{\tableofcontents}
+
+
+% \clearpage
+
+% \listoffigures
+
+% \clearpage
+
+% \lstlistoflistings
+
+\clearpage
+
+% \printglossary
+% \printglossary[type=\acronymtype]
+
+% \clearpage
+
+% \chapter{Introduction}
+% \pagenumbering{arabic}
+% \input{chapters/introduction}
+
+\setlength{\parindent}{2ex}
+
+\setcounter{savepage}{\arabic{page}}
+\pagenumbering{arabic}
+
+
+%\write18{wget https://github.com/philippabele/pythonic-api-design/workflows/Test/badge.svg}
+%\write18{wget https://img.shields.io/badge/Python-3.6\%7C3.7\%7C3.8\%7C3.9-brightgreen}
+
+\markdownInput{chapters/all.md}
+% \pagenumbering{roman}
+% \setcounter{page}{\thesavepage}
+
+% \appendix
+% \addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+% \input{preamble/appendix}
+
+% \clearpage
+
+% \printbibliography
+
+% \clearpage
+
+%\fancyhf{}
+
+\end{document}
